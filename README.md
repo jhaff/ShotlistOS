@@ -32,4 +32,5 @@ We are giving you three primary tasks:
 2. Add solid lines between the dots on the status bar in such a way that they are responsive to different screen sizes and dot count (shown below)
    ![Status bar screenshot](https://i.imgur.com/nPVxTM7.png)
 3. Create a "sticky" header as shown below
+
    ![Sticky header gif](https://media2.giphy.com/media/kkqMugVHli7vSo4En2/giphy.gif)
