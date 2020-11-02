@@ -28,7 +28,7 @@ You will be given a SwiftUI project generated with **Xcode 11.6**. The AppDelega
 
 We are giving you three primary tasks:
 1. Create an editable state for the Background text as shown here
-   ![Background text screenshot](https://imgur.com/uIk7lu7)
+   ![Background text screenshot](https://i.imgur.com/uIk7lu7.png)
 2. Add solid lines between the dots on the status bar in such a way that they are responsive to different screen sizes and dot count (shown below)
    ![Status bar screenshot](https://imgur.com/nPVxTM7)
 3. Create a "sticky" header as shown below
