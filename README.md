@@ -22,6 +22,8 @@ We have given you a set of tasks which should take no more than 10 hours to comp
 
 ## Current code
 
+![Shotlist overview screenshot](https://i.imgur.com/YnUQclp.png)
+
 You will be given a SwiftUI project generated with **Xcode 11.6**. The AppDelegate, SceneDelegate and Info.plist files have been left completely stock as well as no external dependencies will be needed for this challenge (although you may pull in external dependencies as you feel necessary). The project's `ContentView.swift` file calls a single `ShootPreview()` view which is the basis of this challenge. Your tasks will be to modify certain of this preview's sub-views in the alloted time.
 
 ## Milestones
