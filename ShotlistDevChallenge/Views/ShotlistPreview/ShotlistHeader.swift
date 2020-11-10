@@ -4,7 +4,8 @@
 //
 //  Created by Daniel Ashy on 9/28/20.
 //  Copyright © 2020 Daniel Ashy. All rights reserved.
-//
+//  Sticky header achieved with:
+//  https://medium.com/swlh/swiftui-create-a-stretchable-header-with-parallax-scrolling-4a98faeeb262
 
 import SwiftUI
 
@@ -16,19 +17,59 @@ struct ShotlistHeader: View {
   ]
   
   private func goBack() {}
+    
+  // at 0 offset our blur will be 0
+  // at 300 offset our blur will be 6
+  private func getBlurRadiusForImage(_ geometry: GeometryProxy) -> CGFloat {
+
+    let offset = geometry.frame(in: .global).maxY
+
+    let height = geometry.size.height
+    let blur = (height - max(offset, 0)) / height // 3 (values will range from 0 - 1)
+    return blur * 6 // Values will range from 0 - 6
+  }
+    
+  private func getScrollOffset(_ geometry: GeometryProxy) -> CGFloat {
+          geometry.frame(in: .global).minY
+  }
+        
+  private func getOffsetForHeaderImage(_ geometry: GeometryProxy) -> CGFloat {
+    let offset = getScrollOffset(geometry)
+            
+    // Image was pulled down
+    if offset > 0 {
+        return -offset
+    }
+    return 0
+  }
+    
   
+  private let imageHeight: CGFloat = 300 // 1
+  private let collapsedImageHeight: CGFloat = 75 // 2
+
+  private func getHeightForHeaderImage(_ geometry: GeometryProxy) -> CGFloat {
+    let offset = getScrollOffset(geometry)
+    let imageHeight = geometry.size.height
+    if offset > 0 {
+      return imageHeight + offset
+    }
+
+    return imageHeight
+  }
+
   var body: some View {
     ZStack {
-      ZStack {
-        Image("shotlist-hero")
-          .renderingMode(.original)
-          .resizable()
-          .aspectRatio(contentMode: .fill)
-          .frame(height: 390)
-        LinearGradient(gradient: Gradient(colors: gradientColors), startPoint: .top, endPoint: .bottom)
-      }
+        GeometryReader { geometry in
+          Image("shotlist-hero")
+            .resizable()
+            .scaledToFill()
+            .frame(width: geometry.size.width, height: self.getHeightForHeaderImage(geometry))
+            .clipped()
+            .offset(x: 0, y: self.getOffsetForHeaderImage(geometry))
+            .blur(radius: self.getBlurRadiusForImage(geometry))
+        }.frame(height: 390)       
       .frame(height: 390)
-      .clipped()
+        
       
       VStack(spacing: 0) {
         // Nav
