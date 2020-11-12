@@ -24,45 +24,42 @@ struct ShotlistHeader: View {
   
   // MARK: Main view for Shotlist Header
   var body: some View {
-    // MARK: For background image zooming on negative scroll
-    GeometryReader { geometry in
-      Image("shotlist-hero")
-        .resizable()
-        .scaledToFill()
-        .frame(width: geometry.size.width, height: self.getHeightForHeaderImage(geometry))
-        .clipped()
-        .offset(x: 0, y: self.getOffsetForHeaderImage(geometry))
-        .blur(radius: self.getBlurRadiusForImage(geometry))
+      // MARK: For background image zooming on negative scroll
+    ZStack {  
+      VStack(spacing: 0) {
+        // title
+        HStack(spacing: 0) {
+          VStack(alignment: .leading, spacing: 8) {
+            Text("10 October 2020")
+              .font(.custom("Avenir-Roman", size: 14))
+              .foregroundColor(foundationPrimaryB)
+            Text(shoot.title)
+              .font(.custom("Avenir-Medium", size: 32))
+              .foregroundColor(foundationPrimaryB)
+              .lineLimit(1)
+              .frame(maxWidth: 300, alignment: .leading)
+            
+            // button group
+            HStack(spacing: 0) {
+              Text("Los Angeles, CA")
+                .font(.custom("Avenir-Roman", size: 16))
+                .foregroundColor(contentPrimary)
+              Spacer()
+
+              ShotlistHeaderButton(icon: "chat-tab") {
+                //
+              }.padding(.trailing, 8)
+              
+              ShotlistHeaderButton(icon: "download-icon") {
+                //
+              }
+            }
+          }
+        }
+        .padding(.horizontal, 16)
+      }.zIndex(100)
     }
-    .frame(height: 300)
-    
-    // MARK: For background image zooming on negative scroll
-    HStack(spacing: 0) {
-      VStack(alignment: .leading, spacing: 8) {
-        Text("10 October 2020")
-          .font(.custom("Avenir-Roman", size: 14))
-          .foregroundColor(foundationPrimaryB)
-        Text(shoot.title)
-          .font(.custom("Avenir-Medium", size: 32))
-          .foregroundColor(foundationPrimaryB)
-          .lineLimit(1)
-          .frame(maxWidth: 300, alignment: .leading)
-      }
-      Spacer()
-    }
-    .padding(.horizontal, 16)
-    
   }
-  
-  private func getHeightForHeaderImage(_ geometry: GeometryProxy) -> CGFloat {
-    let offset = getScrollOffset(geometry)
-    let imageHeight = geometry.size.height
-    if offset > 0 {
-      return imageHeight + offset
-    }
-    return imageHeight
-  }
-  
   
   private func shouldPresentStickyHeader() -> Bool {
     let currentYPos = titleRect.midY
@@ -86,13 +83,39 @@ struct ShotlistHeader: View {
     geometry.frame(in: .global).minY
   }
   
-  private func getOffsetForHeaderImage(_ geometry: GeometryProxy) -> CGFloat {
+  private func getHeightForHeaderImage(_ geometry: GeometryProxy) -> CGFloat {
     let offset = getScrollOffset(geometry)
-    
-    // Image was pulled down
+    let imageHeight = geometry.size.height
     if offset > 0 {
-      return -offset
+      return imageHeight + offset
     }
-    return 0
+
+    return imageHeight
+  }
+}
+
+struct ShotlistHeaderButton: View {
+  var icon: String
+  var action: () -> Void
+  
+  var body: some View {
+    Button(action: action) {
+      Image(icon)
+        .resizable()
+        .renderingMode(.template)
+        .aspectRatio(contentMode: .fit)
+        .foregroundColor(foundationPrimaryA)
+        .frame(width: 16, height: 16)
+        .background(
+          ZStack {
+            Circle()
+              .stroke(iconGray, lineWidth: 1)
+              .frame(width: 32, height: 32)
+            Circle()
+              .frame(width: 32, height: 32)
+              .foregroundColor(foundationPrimaryB)
+          }
+        )
+    }.frame(width: 32, height: 32)
   }
 }

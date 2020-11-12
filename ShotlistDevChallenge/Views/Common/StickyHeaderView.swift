@@ -56,7 +56,7 @@ struct StickyHeaderView: View {
       .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top == 0 ? 15 : (UIApplication.shared.windows.first?.safeAreaInsets.top)! + 5)
       .padding(.horizontal)
       .padding(.bottom)
-      .background(BlurBG())
+//      .background(BlurBG())
   }
   
   // MARK: Blur background custom view
