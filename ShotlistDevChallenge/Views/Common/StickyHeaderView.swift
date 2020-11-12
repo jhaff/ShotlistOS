@@ -43,7 +43,7 @@ struct StickyHeaderView: View {
 //  }
   
   var body: some View {
-      HStack{
+      HStack {
           Image(uiImage: #imageLiteral(resourceName: "shotlist-hero"))
               .resizable()
               .clipShape(Circle())
@@ -53,10 +53,7 @@ struct StickyHeaderView: View {
               .bold()
           Spacer()
       }
-      .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top == 0 ? 15 : (UIApplication.shared.windows.first?.safeAreaInsets.top)! + 5)
-      .padding(.horizontal)
-      .padding(.bottom)
-//      .background(BlurBG())
+      .background(BlurBG())
   }
   
   // MARK: Blur background custom view

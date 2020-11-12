@@ -4,7 +4,7 @@
 //
 //  Created by Daniel Ashy on 9/28/20.
 //  Copyright © 2020 Daniel Ashy. All rights reserved.
-//  Sticky header achieved with:
+//  Parallax scrolling achieved with:
 //  https://medium.com/swlh/swiftui-create-a-stretchable-header-with-parallax-scrolling-4a98faeeb262
 
 import SwiftUI
@@ -59,17 +59,6 @@ struct ShotlistHeader: View {
         .padding(.horizontal, 16)
       }.zIndex(100)
     }
-  }
-  
-  private func shouldPresentStickyHeader() -> Bool {
-    let currentYPos = titleRect.midY
-    
-    print("header should be presenting!!!! \(titleRect.midY)")
-    
-    if currentYPos < headerImageRect.maxY {
-      return true
-    }
-    return false
   }
   
   private func getBlurRadiusForImage(_ geometry: GeometryProxy) -> CGFloat {
