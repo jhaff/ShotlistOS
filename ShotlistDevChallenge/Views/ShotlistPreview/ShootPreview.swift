@@ -12,6 +12,11 @@ typealias OnClickHandler = (() -> Void)
 
 struct ParentView: View {
   var shoot: Shoot = Shoot.sample
+  let gradientColors: [Color] = [
+    Color(red: 0.01, green: 0.01, blue: 0.01, opacity: 0.5),
+    Color(red: 1, green: 1, blue: 1, opacity: 1)
+  ]
+  
   @State private var description: String = Shoot.sample.description
   @State private var headerImageRect: CGRect = .zero
   @State private var titleRect: CGRect = .zero
@@ -21,59 +26,34 @@ struct ParentView: View {
   @State var showStickyHeader = false
   
   var body: some View {
-    ZStack {
+//    ZStack {
       ScrollView(showsIndicators: false) {
-        VStack {
-          GeometryReader { geometry in
-            ZStack {
-              Image("shotlist-hero")
-                .resizable()
-                .scaledToFill()
-                .frame(width: geometry.size.width, height: self.getHeightForHeaderImage(geometry))
-                .clipped()
-                .offset(x: UIScreen.main.bounds.width / 2 , y: getOffsetForHeaderImage(geometry))
-                .blur(radius: self.getBlurRadiusForImage(geometry))
-                .offset(y: geometry.frame(in: .global).minY > 0 ? -geometry.frame(in: .global).minY : 0)
-                            .frame(height: geometry.frame(in: .global).minY > 0 ?
-                                    UIScreen.main.bounds.height / 2.2 + geometry.frame(in: .global).minY  :
-                                    UIScreen.main.bounds.height / 2.2)
-                            .onReceive(self.time) { (_) in // code smell, we are doing much more processing than needed
-                              // For tracking the image is scrolled out or not
-                              // print(g.frame(in: .global).minY)
-              
-                              let y = geometry.frame(in: .global).minY
-                              if -y > (UIScreen.main.bounds.height / 2.2) - 50 {
-                                withAnimation{
-                                  self.showStickyHeader = true
-                                }
-                              } else {
-                                withAnimation{
-                                  self.showStickyHeader = false
-                                }
-                              }
-                            }
-            }.position(y: UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0)
-          }.frame(height: UIScreen.main.bounds.height / 2.2, alignment: .center)
+//        VStack {
+          
+          
           VStack {
             ShotlistHeader(shoot: shoot, onClick: $onClick).zIndex(0)
             ShotlistPreview(onClick: $onClick).zIndex(50)
-          }
-        }.padding(.vertical, -100)
+          }.offset(x: 0, y: -120) // how far up we want the scroll view to start is this y value
+//        }.padding(.vertical)
         
       }
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .background(foundationPrimaryB)
+      .edgesIgnoringSafeArea(.all)
+      
       if self.showStickyHeader {
         StickyHeaderView(onClick: $onClick)
           .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top == 0 ? 15 : (UIApplication.shared.windows.first?.safeAreaInsets.top)! + 5)
           .padding(.horizontal)
           .padding(.bottom)
           .position(
-            x: UIScreen.main.bounds.width / 2.0 ?? 0.0,
-            y: UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0)
+            x: UIScreen.main.bounds.width / 2.0 ?? 0.0)
       }
-    }
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(foundationPrimaryB)
-    .edgesIgnoringSafeArea(.all)
+//    }
+//    .frame(maxWidth: .infinity, maxHeight: .infinity)
+//    .background(foundationPrimaryB)
+//    .edgesIgnoringSafeArea(.all)
   }
   
   
@@ -87,12 +67,38 @@ struct ParentView: View {
     return imageHeight
   }
   private let imageHeight: CGFloat = 390 // 1
-  private let collapsedImageHeight: CGFloat = 50
-  
+  private let collapsedImageHeight: CGFloat = 44
   private func getOffsetForHeaderImage(_ geometry: GeometryProxy) -> CGFloat {
+    let scrollOffset = getScrollOffset(geometry)
+    let sizeOffScreen = imageHeight// 3
+    
+    // subtradct safeAreaInsets.top so that image will overlap safe area
+    
     let offset = getScrollOffset(geometry)
     
-    return -offset + imageHeight / 2.2 // case where image zooms in response to negative scrolling
+    //    print(offset)
+    
+    // for the negative scroll
+    if offset > 0 {
+      print("-offset")
+      print(-offset + (imageHeight / 2.2))
+      
+      return  200 - offset// case where image zooms in response to negative scrolling
+    }
+    
+    
+    
+    if offset < -sizeOffScreen { // case to create the 44px sticky header after scrolling far enough
+      // Since we want 44 px fixed on the screen we get our offset of -256 or anything less than. Take the abs value
+      let imageOffset = abs(min(-sizeOffScreen, offset))
+      
+      // Now we can the amount of offset above our size off screen. So if we've scrolled -250px our size offscreen is -225px we offset our image by an additional 25 px to put it back at the amount needed to remain offscreen/amount on screen.
+      print("cool")
+      
+      return imageOffset - sizeOffScreen
+    }
+
+    return imageHeight / 2
   }
   
   private func getBlurRadiusForImage(_ geometry: GeometryProxy) -> CGFloat {
@@ -101,7 +107,7 @@ struct ParentView: View {
     
     let height = geometry.size.height
     let blur = (height - max(offset, 0)) / height // 3 (values will range from 0 - 1)
-    return blur * 6 // Values will range from 0 - 6
+    return blur * 3 // Values will range from 0 - 6
   }
   
   private func getScrollOffset(_ geometry: GeometryProxy) -> CGFloat {

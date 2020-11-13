@@ -9,10 +9,15 @@
 import SwiftUI
 
 struct ContentView: View {
+  @State var onClick: OnClickHandler = { }
+
   var body: some View {
-    ParentView()
+    ZStack {
+      ParentView()
+      
+    }
+    }
   }
-}
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {

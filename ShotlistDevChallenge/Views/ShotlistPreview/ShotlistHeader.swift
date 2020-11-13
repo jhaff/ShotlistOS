@@ -25,6 +25,34 @@ struct ShotlistHeader: View {
   // MARK: Main view for Shotlist Header
   var body: some View {
       // MARK: For background image zooming on negative scroll
+    GeometryReader { geometry in
+      ZStack {
+        ZStack {
+          Image("shotlist-hero")
+            .resizable()
+            .scaledToFill()
+            .blur(radius: self.getBlurRadiusForImage(geometry)) // increasing blur while scrolling
+          .clipped()
+            .onReceive(self.time) { (_) in // potential code smell, this is a
+              let y = geometry.frame(in: .global).minY
+              if -y > (UIScreen.main.bounds.height / 2.2) - 50 {
+                withAnimation{
+                  self.showStickyHeader = true
+                }
+              } else {
+                withAnimation{
+                  self.showStickyHeader = false
+                }
+              }
+            }
+          LinearGradient(gradient: Gradient(colors: gradientColors), startPoint: .top, endPoint: .bottom)
+          
+        }
+        .offset(x: UIScreen.main.bounds.width / 2 , y: getOffsetForHeaderImage(geometry))
+      }
+      .position(y: 0) //ensure header image overlaps safe area top
+      .frame(width: geometry.size.width, height: self.getHeightForHeaderImage(geometry))
+    }.frame(height: 390)
     ZStack {  
       VStack(spacing: 0) {
         // title
