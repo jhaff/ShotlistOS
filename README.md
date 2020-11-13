@@ -1,6 +1,6 @@
 ## Notes:
 
-- Be sure to look at my pull requests, as I have made notes in them on my code similar to how I would do for a code review.
+- Be sure to look at my closed pull requests, as I made notes in the descriptions about the changes.
 - Please disregard the git history until commit 73c2116a "Parallax view and sticky header working"
 - I normally make branches for each major feature and merge them into master one by one, but I was working in a detached head state in the beginning of the project. I'd doctor the history to clean it up, but for the sake of time I left it as-is and moved forward with better practices.
 
