@@ -27,7 +27,7 @@ struct StickyHeaderView: View {
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fit)
                 .frame(width: 24, height: 24)
-                .foregroundColor(foundationPrimaryB)
+                .foregroundColor(.black)
             }
             
             Spacer()
@@ -45,7 +45,7 @@ struct StickyHeaderView: View {
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fit)
                 .frame(width: 24, height: 24)
-                .foregroundColor(foundationPrimaryB)
+                .foregroundColor(.black)
             }
           }
           
