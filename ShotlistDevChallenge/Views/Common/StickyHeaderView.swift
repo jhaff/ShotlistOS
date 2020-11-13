@@ -21,34 +21,12 @@ struct StickyHeaderView: View {
         VStack(spacing: 0) {
           // Nav
           HStack(spacing: 10) {
-            Button(action: goBack) {
-              Image("back-icon")
-                .renderingMode(.template)
-                .resizable()
-                .aspectRatio(1.0, contentMode: .fit)
-                .frame(width: 24, height: 24)
-                .foregroundColor(.black)
-            }
-            
+            ShotlistStickyHeaderButton(icon: "back-icon")
             Spacer()
-            
-            Text("Sample Shotlist")
-              .bold()
-            
+            Text("Sample Shotlist").bold()
             Spacer()
-            
-            Button(action: {
-              //
-            }) {
-              Image("export-icon")
-                .renderingMode(.template)
-                .resizable()
-                .aspectRatio(1.0, contentMode: .fit)
-                .frame(width: 24, height: 24)
-                .foregroundColor(.black)
-            }
+            ShotlistStickyHeaderButton(icon: "export-icon")
           }
-          
         }
       }
     }
@@ -59,43 +37,36 @@ struct StickyHeaderView: View {
     .background(BlurBG())
     .frame(width:  UIScreen.main.bounds.width)
   }
-
-// MARK: Blur background custom view
-struct BlurBG: UIViewRepresentable {
-  func makeUIView(context: Context) -> UIVisualEffectView {
+  
+  // MARK: Blur background custom view
+  struct BlurBG: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIVisualEffectView {
+      // for dark mode adoption
+      let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+      
+      return view
+    }
     
-    // for dark mode adoption
-    let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
-    
-    return view
-    
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+      // conforming to UIViewRepresentable's protocols
+    }
   }
   
-  func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+  struct ShotlistStickyHeaderButton: View {
+    var icon: String
+    func action() {
+      print("AHH")
+    }
     
+    var body: some View {
+      Button(action: action) {
+        Image(icon)
+          .renderingMode(.template)
+          .resizable()
+          .aspectRatio(1.0, contentMode: .fit)
+          .frame(width: 24, height: 24)
+          .foregroundColor(.black)
+      }.frame(width: 32, height: 32)
+    }
   }
-}
-
-private func doMagic() {
-  print("We love closures")
-  titleText = "But in a platonic way"
-}
-
-struct ShotlistHeaderButton: View {
-  var icon: String
-  func action() {
-    print("AHH")
-  }
-  
-  var body: some View {
-    Button(action: action) {
-      Image(icon)
-        .renderingMode(.template)
-        .resizable()
-        .aspectRatio(1.0, contentMode: .fit)
-        .frame(width: 24, height: 24)
-        .foregroundColor(foundationPrimaryB)
-    }.frame(width: 32, height: 32)
-  }
-}
 }
