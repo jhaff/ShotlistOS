@@ -81,6 +81,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		356E1140255E752200A3655A /* ShotlistInformation Sections */ = {
+			isa = PBXGroup;
+			children = (
+				DAF09E3F2550734A009E2598 /* ShotlistTeamChat.swift */,
+				DAF09E442550734A009E2598 /* ShotlistLocations.swift */,
+				DAF09E452550734A009E2598 /* BackgroundInfo.swift */,
+				DAF09E4B2550734A009E2598 /* ShotlistRequiredShots.swift */,
+			);
+			path = "ShotlistInformation Sections";
+			sourceTree = "<group>";
+		};
+		356E1141255E75E000A3655A /* ShotlistPreview Elements */ = {
+			isa = PBXGroup;
+			children = (
+				DAF09E4A2550734A009E2598 /* Options.swift */,
+				356E113A255E6E4600A3655A /* ShotlistInformation.swift */,
+				356687D2255D7F1E00E362E0 /* StickyHeaderView.swift */,
+				356E1136255E6C5B00A3655A /* ShotlistNav.swift */,
+				DAF09E402550734A009E2598 /* ShotlistHeader.swift */,
+			);
+			path = "ShotlistPreview Elements";
+			sourceTree = "<group>";
+		};
 		DAF09E14255068D9009E2598 = {
 			isa = PBXGroup;
 			children = (
@@ -125,14 +148,9 @@
 		DAF09E342550734A009E2598 /* ShotlistPreview */ = {
 			isa = PBXGroup;
 			children = (
+				356E1141255E75E000A3655A /* ShotlistPreview Elements */,
+				356E1140255E752200A3655A /* ShotlistInformation Sections */,
 				DAF09E3E2550734A009E2598 /* ShotlistPreview.swift */,
-				DAF09E3F2550734A009E2598 /* ShotlistTeamChat.swift */,
-				DAF09E402550734A009E2598 /* ShotlistHeader.swift */,
-				DAF09E442550734A009E2598 /* ShotlistLocations.swift */,
-				DAF09E452550734A009E2598 /* BackgroundInfo.swift */,
-				DAF09E4A2550734A009E2598 /* Options.swift */,
-				DAF09E4B2550734A009E2598 /* ShotlistRequiredShots.swift */,
-				356E113A255E6E4600A3655A /* ShotlistInformation.swift */,
 			);
 			path = ShotlistPreview;
 			sourceTree = "<group>";
@@ -153,10 +171,8 @@
 				DAF09E65255078BC009E2598 /* TasksPreview.swift */,
 				DAF09E63255074D4009E2598 /* Colors.swift */,
 				DAF09E612550748E009E2598 /* StateBar.swift */,
-				356687D2255D7F1E00E362E0 /* StickyHeaderView.swift */,
 				3507DBC0255E2F7300BC989C /* ParallaxView.swift */,
 				35FF8FC8255E3D3F0099B0E4 /* TextView.swift */,
-				356E1136255E6C5B00A3655A /* ShotlistNav.swift */,
 				356E113D255E6EEB00A3655A /* Utilities.swift */,
 			);
 			path = Common;
