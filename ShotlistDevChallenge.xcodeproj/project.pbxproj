@@ -93,8 +93,9 @@
 		356E1141255E75E000A3655A /* ShotlistPreview Elements */ = {
 			isa = PBXGroup;
 			children = (
-				DAF09E4A2550734A009E2598 /* Options.swift */,
+				3507DBC0255E2F7300BC989C /* ParallaxView.swift */,
 				356E113A255E6E4600A3655A /* ShotlistInformation.swift */,
+				DAF09E4A2550734A009E2598 /* Options.swift */,
 				356687D2255D7F1E00E362E0 /* StickyHeaderView.swift */,
 				356E1136255E6C5B00A3655A /* ShotlistNav.swift */,
 				DAF09E402550734A009E2598 /* ShotlistHeader.swift */,
@@ -168,7 +169,6 @@
 				DAF09E65255078BC009E2598 /* TasksPreview.swift */,
 				DAF09E63255074D4009E2598 /* Colors.swift */,
 				DAF09E612550748E009E2598 /* StateBar.swift */,
-				3507DBC0255E2F7300BC989C /* ParallaxView.swift */,
 				35FF8FC8255E3D3F0099B0E4 /* TextView.swift */,
 				356E113D255E6EEB00A3655A /* Utilities.swift */,
 			);
