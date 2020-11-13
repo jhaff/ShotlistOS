@@ -9,69 +9,54 @@
 import SwiftUI
 
 struct BackgroundInfo: View {
-  @Binding var description: String
+  @Binding var shoot: Shoot
+  @Binding var textStyle: UIFont.TextStyle
+  @Binding var editTapped: EditTappedHandler
   
-    // Var Editing: some Button
-    
-    // fanciness: dissmiss keyboard upon scrolling and save description and change state of button
-    
-    // Auto scroll to Background on top
-    
-    // stretch goal: rounded background light grey rectangle on editing state
-
-    
-    // https://medium.com/swlh/swiftui-create-a-stretchable-header-with-parallax-scrolling-4a98faeeb262
-    
-    
-    
-    // Sticky header: include back and share buttons in header/navbar. Push image
-    // to top and animate title moving to header position.
-    
-    // stretch goal: reverse scroll makes bg image zoom
-    
-    
-    // use geometry reader for potential autoscroller
-    // keyboard guard at bottom of background info. Pushes view up to the top of the keyboard
-    
-    
-    //navbar: 44px, YES put in buttons
+  @State var isEditing: Bool = false
+  
+  //navbar: 44px, YES put in buttons
   var body: some View {
+    
     VStack(spacing: 8) {
-      HStack {
-        Text("Background")
-          .font(.custom("Avenir-Heavy", size: 20))
-          .foregroundColor(contentPrimary)
-        Button(action: {
-            print("Edit button was tapped")
-        }) {
-            Image(systemName: "pencil")
-        }
-        Spacer()
-      }
+      BackgroundInfoHeader(description: $shoot.description, editTapped: $editTapped, shoot: $shoot, isEditing: $isEditing)
       
-      // MARK: TODO edit this description box
-        
-        // if editing == true {
-        // TextEditor(text: $description)
-//      .font(.custom("Avenir-Roman", size: 14))
-//      .foregroundColor(contentPrimary)
-        //else
-        
-      Text(description)
-        .font(.custom("Avenir-Roman", size: 12))
+      Spacer()
+    }
+    
+    TextView(text: $shoot.description, shoot:$shoot, textStyle: $textStyle, isEditing: $isEditing)
+      .frame(height: 100, alignment: .leading) // TODO: set height programmatically by textview content
+    
+  }
+}
+
+
+struct BackgroundInfoHeader: View {
+  @Binding var description: String
+  @Binding var editTapped: EditTappedHandler
+  @Binding var shoot: Shoot
+  
+  @Binding var isEditing: Bool
+  
+  var body: some View {
+    HStack {
+      Text("Background")
+        .font(.custom("Avenir-Heavy", size: 20))
         .foregroundColor(contentPrimary)
+      Button(action: {
+        print("Edit button was tapped")
+        isEditing.toggle()
+        //TODO: Find elegant way to change and persist change to shoot.description.
+        //For now this is a moot point, as shoot is recreated from Shoot.sample every time the app is opened.
+        shoot.description = description
+      }) {
+        if isEditing == true {
+          Image(systemName: "pencil").colorInvert()
+        } else {
+          Image(systemName: "pencil")
+        }
+      }
+      Spacer()
     }
   }
 }
-//
-//struct BackgroundInfo_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BackgroundInfo(description: "Test")
-//    }
-//}
-
-//struct BackgroundInfo_Previews: PreviewProvider {
-//    static var previews: some View {
-//        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
-//    }
-//}
