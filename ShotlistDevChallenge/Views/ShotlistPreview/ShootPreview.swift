@@ -26,14 +26,17 @@ struct ShootPreview: View {
   var body: some View {
     ZStack {
       ScrollView(showsIndicators: false) {
+        // responsive background image
         ParallaxView(onClick: $onClick, showStickyHeader: $showStickyHeader)
+        
+        // the shotlist information
         VStack {
           ShotlistHeader(shoot: shoot, onClick: $onClick).zIndex(40)
           ShotlistPreview(onClick: $onClick).zIndex(50)
         }.offset(x: 0, y: -120) // how far up we want
-        
       }.background(GeometryGetter(rect: $headerContent.frame))
       
+      // sticky header
       if self.showStickyHeader {
         StickyHeaderView(onClick: $onClick)
           .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top == 0 ? 15 : (UIApplication.shared.windows.first?.safeAreaInsets.top)! + 5)
@@ -43,42 +46,13 @@ struct ShootPreview: View {
             x: UIScreen.main.bounds.width / 2.0 ?? 0.0
           )
       } else {
-        HStack(spacing: 10) {
-          Button(action: onClick) {
-            Image("back-icon")
-              .renderingMode(.template)
-              .resizable()
-              .aspectRatio(1.0, contentMode: .fit)
-              .frame(width: 24, height: 24)
-              .foregroundColor(foundationPrimaryB)
-          }
-          
-          Spacer()
-          
-          Button(action: {
-            
-          }) {
-            Image("export-icon")
-              .renderingMode(.template)
-              .resizable()
-              .aspectRatio(1.0, contentMode: .fit)
-              .frame(width: 24, height: 24)
-              .foregroundColor(foundationPrimaryB)
-          }
-        }
-        .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top == 0 ? 44 : (UIApplication.shared.windows.first?.safeAreaInsets.top)! + 88)
-        .padding(.horizontal)
-        .padding(.bottom)
-        .position(
-          x: UIScreen.main.bounds.width / 2.0 ?? 0.0
-        )
-        
+        // top non-sticky nav
+        ShotlistNavbar()
       }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(foundationPrimaryB)
     .edgesIgnoringSafeArea(.all)
-    
   }
 
   private func getBlurRadiusForImage(_ geometry: GeometryProxy) -> CGFloat {
@@ -144,6 +118,38 @@ struct ShootPreview: View {
         TasksPreview()
         ShotlistTeamChat()
       }.padding(.horizontal, 16).zIndex(10)
+    }
+  }
+  
+  struct ShotlistNavbar: View {
+    var body: some View {
+      HStack(spacing: 10) {
+        Button(action: {}) {
+          Image("back-icon")
+            .renderingMode(.template)
+            .resizable()
+            .aspectRatio(1.0, contentMode: .fit)
+            .frame(width: 24, height: 24)
+            .foregroundColor(foundationPrimaryB)
+        }
+        
+        Spacer()
+        
+        Button(action: {
+          
+        }) {
+          Image("export-icon")
+            .renderingMode(.template)
+            .resizable()
+            .aspectRatio(1.0, contentMode: .fit)
+            .frame(width: 24, height: 24)
+            .foregroundColor(foundationPrimaryB)
+        }
+      }
+      .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top == 0 ? 44 : (UIApplication.shared.windows.first?.safeAreaInsets.top)! + 88)
+      .padding(.horizontal)
+      .padding(.bottom)
+      .position(x: UIScreen.main.bounds.width / 2.0 ?? 0.0)
     }
   }
   
