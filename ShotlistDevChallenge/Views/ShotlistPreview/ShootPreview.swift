@@ -29,11 +29,11 @@ struct ShootPreview: View {
     ZStack {
       ScrollView(showsIndicators: false) {
         // responsive background image
-        ParallaxView(onClick: $onClick, showStickyHeader: $showStickyHeader)
+        ParallaxView(showStickyHeader: $showStickyHeader)
         
         // the shotlist information
         VStack {
-          ShotlistHeader(shoot: shoot, onClick: $onClick).zIndex(40)
+          ShotlistHeader(shoot: shoot).zIndex(40)
           ShotlistPreview(shoot: $shoot, onClick: $onClick).zIndex(50).padding(.horizontal, 16).zIndex(10)
         }
         .offset(y: -120) // how far up we want

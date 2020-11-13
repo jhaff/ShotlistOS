@@ -11,23 +11,11 @@ import SwiftUI
 
 struct ShotlistHeader: View {
   var shoot: Shoot
-  let gradientColors: [Color] = [
-    Color(red: 0.01, green: 0.01, blue: 0.01, opacity: 0.1),
-    Color(red: 1, green: 1, blue: 1, opacity: 1)
-  ]
   
-  @State private var titleRect: CGRect = .zero
-  @Binding var onClick: OnClickHandler
-  @State private var headerImageRect: CGRect = .zero
-  
-  private func goBack() {}
-  
-  // MARK: Main view for Shotlist Header
   var body: some View {
-      // MARK: For background image zooming on negative scroll
-    ZStack {  
+    ZStack {
       VStack(spacing: 0) {
-        // title
+        // title header
         HStack(spacing: 0) {
           VStack(alignment: .leading, spacing: 8) {
             Text("10 October 2020")
@@ -44,14 +32,15 @@ struct ShotlistHeader: View {
               Text("Los Angeles, CA")
                 .font(.custom("Avenir-Roman", size: 16))
                 .foregroundColor(contentPrimary)
+              
               Spacer()
-
+              
               ShotlistHeaderButton(icon: "chat-tab") {
-                //
+                // config button action here
               }.padding(.trailing, 8)
               
               ShotlistHeaderButton(icon: "download-icon") {
-                //
+                // config button action here
               }
             }
           }
@@ -59,27 +48,6 @@ struct ShotlistHeader: View {
         .padding(.horizontal, 16)
       }.zIndex(100)
     }
-  }
-  
-  private func getBlurRadiusForImage(_ geometry: GeometryProxy) -> CGFloat {
-    let offset = geometry.frame(in: .global).maxY
-    let height = geometry.size.height
-    let blur = (height - max(offset, 0)) / height // 3 (values will range from 0 - 1)
-    return blur * 6 // Values will range from 0 - 6
-  }
-  
-  private func getScrollOffset(_ geometry: GeometryProxy) -> CGFloat {
-    geometry.frame(in: .global).minY
-  }
-  
-  private func getHeightForHeaderImage(_ geometry: GeometryProxy) -> CGFloat {
-    let offset = getScrollOffset(geometry)
-    let imageHeight = geometry.size.height
-    if offset > 0 {
-      return imageHeight + offset
-    }
-
-    return imageHeight
   }
 }
 
