@@ -43,7 +43,7 @@ struct StateBar: View {
           
           if (i < (self.states.count - 1)) {
             VStack{
-                Divider().padding(.bottom, 18)
+              Divider().padding(.bottom, 18)
             }
           }
         }
@@ -65,15 +65,15 @@ struct StateBubble: View {
       Circle()
         .frame(width: dotSize, height: dotSize)
         .foregroundColor(current == state
-          ? foundationAccent
-          : (completed ? contentTertiary : borderGray))
+                          ? foundationAccent
+                          : (completed ? contentTertiary : borderGray))
         .overlay(
           Image(systemName: "checkmark")
             .resizable()
             .frame(width: checkSize, height: checkSize)
             .foregroundColor(.white)
             .opacity(completed ? 1 : 0)
-      )
+        )
     }.frame(width: dotSize, height: dotSize, alignment: .center)
   }
 }
