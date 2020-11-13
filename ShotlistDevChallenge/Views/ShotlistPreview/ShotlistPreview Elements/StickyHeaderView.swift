@@ -12,9 +12,9 @@ import SwiftUI
 struct StickyHeaderView: View {
   @Binding var onClick: OnClickHandler
   @State var titleText = "We love closures"
-  
+
   private func goBack() {}
-  
+
   var body: some View {
     ZStack {
       HStack {
@@ -35,29 +35,29 @@ struct StickyHeaderView: View {
     .padding(.horizontal, 18)
     .zIndex(40)
     .background(BlurBG())
-    .frame(width:  UIScreen.main.bounds.width)
+    .frame(width: UIScreen.main.bounds.width)
   }
-  
+
   // MARK: Blur background custom view
   struct BlurBG: UIViewRepresentable {
     func makeUIView(context: Context) -> UIVisualEffectView {
       // for dark mode adoption
       let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
-      
+
       return view
     }
-    
+
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
       // conforming to UIViewRepresentable's protocols
     }
   }
-  
+
   struct ShotlistStickyHeaderButton: View {
     var icon: String
     func action() {
       print("AHH")
     }
-    
+
     var body: some View {
       Button(action: action) {
         Image(icon)

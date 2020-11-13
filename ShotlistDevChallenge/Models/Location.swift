@@ -11,6 +11,6 @@ import Foundation
 struct Location {
   var id: Int
   var title: String
-  
+
   static var sample = Location(id: 1, title: "Sample Location")
 }

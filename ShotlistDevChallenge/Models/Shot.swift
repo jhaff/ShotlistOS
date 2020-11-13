@@ -11,6 +11,6 @@ import Foundation
 struct Shot {
   var id: Int
   var title: String
-  
+
   static var sample = Shot(id: 1, title: "Sample Shot")
 }

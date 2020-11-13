@@ -11,19 +11,19 @@ import SwiftUI
 struct StateBar: View {
   var states: [String]
   var current: String
-  
+
   var dotSize: CGFloat = 15
   var checkSize: CGFloat = 8
-  
+
   init(states: [String], current: String) {
     self.states = states
     self.current = current
   }
-  
+
   private func isComplete(_ index: Int) -> Bool {
     return self.states.firstIndex(of: self.current)! > index
   }
-  
+
   // MARK: TODO add a line between each dot that is responsive to both screen size and dot count.
   var body: some View {
     HStack(spacing: 0) {
@@ -40,9 +40,9 @@ struct StateBar: View {
               .foregroundColor(contentPrimary)
               .fixedSize()
           }.frame(width: 15)
-          
-          if (i < (self.states.count - 1)) {
-            VStack{
+
+          if i < (self.states.count - 1) {
+            VStack {
               Divider().padding(.bottom, 18)
             }
           }
@@ -56,10 +56,10 @@ struct StateBubble: View {
   var current: String
   var state: String
   var completed: Bool
-  
+
   var dotSize: CGFloat = 15
   var checkSize: CGFloat = 6
-  
+
   var body: some View {
     ZStack {
       Circle()

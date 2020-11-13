@@ -11,7 +11,7 @@ import SwiftUI
 
 struct GeometryGetter: View {
   @Binding var rect: CGRect
-  
+
   var body: some View {
     GeometryReader { geometry in
       AnyView(Color.clear)
@@ -25,7 +25,7 @@ struct GeometryGetter: View {
 // for tracking any rectangle passed in
 struct RectanglePreferenceKey: PreferenceKey {
   static var defaultValue: CGRect = .zero
-  
+
   static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
     value = nextValue()
   }
@@ -33,7 +33,7 @@ struct RectanglePreferenceKey: PreferenceKey {
 
 class ViewFrame: ObservableObject {
   var startingRect: CGRect?
-  
+
   @Published var frame: CGRect {
     willSet {
       if startingRect == nil {
@@ -41,7 +41,7 @@ class ViewFrame: ObservableObject {
       }
     }
   }
-  
+
   init() {
     self.frame = .zero
   }

@@ -15,9 +15,9 @@ struct ShotlistInformation: View {
   @State private var textStyle: UIFont.TextStyle = UIFont.TextStyle.body
   @State var isEditing: Bool = false
   @State var editTapped: EditTappedHandler = { }
-  
+
   @Binding var onClick: OnClickHandler
-  
+
   var body: some View {
     Group {
       ShotlistStatusBar()
@@ -36,7 +36,7 @@ struct ShotlistStatusBar: View {
   private var states: [String] = [
     "Concept", "Scheduled", "Editing", "Complete"
   ]
-  
+
   var body: some View {
     VStack(spacing: 0) {
       StateBar(states: self.states,

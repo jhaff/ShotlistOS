@@ -11,14 +11,14 @@ import SwiftUI
 struct TasksPreview: View {
   var tasks: [Task] = [ Task.sample ]
   let title: String
-  
+
   init(title: String = "Tasks") {
     self.title = title
   }
-  
+
   private func addTask() {}
   private func showOverview() {}
-  
+
   var body: some View {
     VStack(spacing: 0) {
       HStack {
@@ -35,15 +35,15 @@ struct TasksPreview: View {
         }
       }
       .frame(height: 44)
-      
+
       VStack(spacing: 20) {
         ForEach(tasks, id: \.id) { task in
           TaskPreviewCard(task) {
             self.showOverview()
           }
         }
-        
-        AddButton() {
+
+        AddButton {
           self.addTask()
         }
       }
@@ -56,12 +56,12 @@ private struct TaskPreviewCard: View {
   let icons: [String] = [ "task-calendar", "task-notes",
                           "task-subtask", "task-shotlist" ]
   let action: () -> Void
-  
+
   init(_ task: Task, action: @escaping () -> Void) {
     self.task = task
     self.action = action
   }
-  
+
   var body: some View {
     ZStack {
       RoundedRectangle(cornerRadius: 10)
@@ -76,13 +76,13 @@ private struct TaskPreviewCard: View {
           .frame(width: 24, height: 24)
           .foregroundColor(foundationAccent)
           .padding(.horizontal, 14)
-        
+
         Text(task.title)
           .font(.custom("Avenir-Roman", size: 16))
           .foregroundColor(contentPrimary)
-        
+
         Spacer()
-        
+
         HStack(spacing: 4) {
           ForEach(icons, id: \.self) { icon in
             Image(icon)
@@ -105,11 +105,9 @@ private struct TaskPreviewCard: View {
   }
 }
 
-
-
 private struct AddButton: View {
-  var action: () -> ()
-  
+  var action: () -> Void
+
   var body: some View {
     Button(action: action) {
       ZStack {

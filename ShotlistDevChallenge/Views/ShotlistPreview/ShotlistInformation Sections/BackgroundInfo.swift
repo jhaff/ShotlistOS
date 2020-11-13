@@ -12,32 +12,31 @@ struct BackgroundInfo: View {
   @Binding var shoot: Shoot
   @Binding var textStyle: UIFont.TextStyle
   @Binding var editTapped: EditTappedHandler
-  
+
   @State var isEditing: Bool = false
-  
+
   //navbar: 44px, YES put in buttons
   var body: some View {
-    
+
     VStack(spacing: 8) {
       BackgroundInfoHeader(description: $shoot.description, editTapped: $editTapped, shoot: $shoot, isEditing: $isEditing)
-      
+
       Spacer()
     }
-    
-    TextView(text: $shoot.description, shoot:$shoot, textStyle: $textStyle, isEditing: $isEditing)
+
+    TextView(text: $shoot.description, shoot: $shoot, textStyle: $textStyle, isEditing: $isEditing)
       .frame(height: 100, alignment: .leading) // TODO: set height programmatically by textview content
-    
+
   }
 }
-
 
 struct BackgroundInfoHeader: View {
   @Binding var description: String
   @Binding var editTapped: EditTappedHandler
   @Binding var shoot: Shoot
-  
+
   @Binding var isEditing: Bool
-  
+
   var body: some View {
     HStack {
       Text("Background")

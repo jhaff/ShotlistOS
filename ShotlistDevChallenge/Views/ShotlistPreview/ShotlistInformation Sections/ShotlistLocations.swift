@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct ShotlistLocations: View {
-  
+
   var locations: [Location] = [ Location.sample ]
-  
+
   var body: some View {
     VStack(spacing: 0) {
       // Header
@@ -19,9 +19,9 @@ struct ShotlistLocations: View {
         Text("Location(s)")
           .font(.custom("Avenir-Medium", size: 18))
           .foregroundColor(contentPrimary)
-        
+
         Spacer()
-        
+
         Button(action: {
           //
         }) {
@@ -30,14 +30,14 @@ struct ShotlistLocations: View {
             .foregroundColor(contentSecondary)
         }
       }.frame(height: 44)
-      
+
       // Body
       ScrollView(.horizontal, showsIndicators: false) {
         ForEach(locations, id: \.id) { location in
           LocationCard(location)
         }
       }
-      
+
     }.frame(height: 148).padding(.top, 35)
   }
 }

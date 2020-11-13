@@ -20,11 +20,11 @@ struct ShotlistNav: View {
           .frame(width: 24, height: 24)
           .foregroundColor(foundationPrimaryB)
       }
-      
+
       Spacer()
-      
+
       Button(action: {
-        
+
       }) {
         Image("export-icon")
           .renderingMode(.template)

@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ShotlistHeader: View {
   var shoot: Shoot
-  
+
   var body: some View {
     ZStack {
       VStack(spacing: 0) {
@@ -26,19 +26,19 @@ struct ShotlistHeader: View {
               .foregroundColor(foundationPrimaryB)
               .lineLimit(1)
               .frame(maxWidth: 300, alignment: .leading)
-            
+
             // button group
             HStack(spacing: 0) {
               Text("Los Angeles, CA")
                 .font(.custom("Avenir-Roman", size: 16))
                 .foregroundColor(contentPrimary)
-              
+
               Spacer()
-              
+
               ShotlistHeaderButton(icon: "chat-tab") {
                 // config button action here
               }.padding(.trailing, 8)
-              
+
               ShotlistHeaderButton(icon: "download-icon") {
                 // config button action here
               }
@@ -54,7 +54,7 @@ struct ShotlistHeader: View {
 struct ShotlistHeaderButton: View {
   var icon: String
   var action: () -> Void
-  
+
   var body: some View {
     Button(action: action) {
       Image(icon)
