@@ -12,10 +12,7 @@ struct ContentView: View {
   @State var onClick: OnClickHandler = { }
 
   var body: some View {
-    ZStack {
-      ParentView()
-      
-    }
+      ShootPreview()
     }
   }
 

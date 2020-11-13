@@ -18,7 +18,6 @@ struct StickyHeaderView: View {
   var body: some View {
     ZStack {
       HStack {
-        
         VStack(spacing: 0) {
           // Nav
           HStack(spacing: 10) {

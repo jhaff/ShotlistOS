@@ -10,12 +10,14 @@ import SwiftUI
 
 typealias OnClickHandler = (() -> Void)
 
-struct ParentView: View {
+struct ShootPreview: View {
   var shoot: Shoot = Shoot.sample
   let gradientColors: [Color] = [
     Color(red: 0.01, green: 0.01, blue: 0.01, opacity: 0.5),
     Color(red: 1, green: 1, blue: 1, opacity: 1)
   ]
+  
+  @ObservedObject var headerContent = ViewFrame() // potential code smell
   
   @State private var description: String = Shoot.sample.description
   @State private var headerImageRect: CGRect = .zero
@@ -26,34 +28,54 @@ struct ParentView: View {
   @State var showStickyHeader = false
   
   var body: some View {
-//    ZStack {
-      ScrollView(showsIndicators: false) {
-//        VStack {
-          
-          
-          VStack {
-            ShotlistHeader(shoot: shoot, onClick: $onClick).zIndex(0)
-            ShotlistPreview(onClick: $onClick).zIndex(50)
-          }.offset(x: 0, y: -120) // how far up we want the scroll view to start is this y value
-//        }.padding(.vertical)
+    ScrollView(showsIndicators: false) {
+      ZStack {
+        if self.showStickyHeader {
+          StickyHeaderView(onClick: $onClick)
+            .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top == 0 ? 15 : (UIApplication.shared.windows.first?.safeAreaInsets.top)! + 5)
+            .padding(.horizontal)
+            .padding(.bottom)
+            .position(
+              x: UIScreen.main.bounds.width / 2.0 ?? 0.0
+            )
+        }
         
-      }
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .background(foundationPrimaryB)
-      .edgesIgnoringSafeArea(.all)
-      
-      if self.showStickyHeader {
-        StickyHeaderView(onClick: $onClick)
-          .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top == 0 ? 15 : (UIApplication.shared.windows.first?.safeAreaInsets.top)! + 5)
-          .padding(.horizontal)
-          .padding(.bottom)
-          .position(
-            x: UIScreen.main.bounds.width / 2.0 ?? 0.0)
-      }
-//    }
-//    .frame(maxWidth: .infinity, maxHeight: .infinity)
-//    .background(foundationPrimaryB)
-//    .edgesIgnoringSafeArea(.all)
+          GeometryReader { geometry in
+            ZStack {
+              Image("shotlist-hero")
+                .resizable()
+                .scaledToFill()
+//                .blur(radius: self.getBlurRadiusForImage(geometry)) // increasing blur while scrolling
+                .clipped()
+                .onReceive(self.time) { (_) in // potential code smell, this is a
+                  let y = geometry.frame(in: .global).minY
+                  if -y > (UIScreen.main.bounds.height / 2.2) - 50 {
+                    withAnimation{
+                      self.showStickyHeader = true
+                    }
+                  } else {
+                    withAnimation{
+                      self.showStickyHeader = false
+                    }
+                  }
+                }
+              LinearGradient(gradient: Gradient(colors: gradientColors), startPoint: .top, endPoint: .bottom)
+              
+            }
+            .offset(y: getOffsetForHeaderImage(geometry))
+            .frame(width: geometry.size.width, height: self.getHeightForHeaderImage(geometry))
+            
+          }.frame(height: 390)
+      }.background(GeometryGetter(rect: $headerContent.frame))
+      VStack {
+      ShotlistHeader(shoot: shoot, onClick: $onClick).zIndex(40)
+      ShotlistPreview(onClick: $onClick).zIndex(50)
+      }.offset(x: 0, y: -120) // how far up we want
+
+    }.frame(maxWidth: .infinity, maxHeight: .infinity)
+    .background(foundationPrimaryB)
+    .edgesIgnoringSafeArea(.all)
+    
   }
   
   
@@ -66,39 +88,21 @@ struct ParentView: View {
     }
     return imageHeight
   }
-  private let imageHeight: CGFloat = 390 // 1
+  private let imageHeight: CGFloat = 200 // 1
   private let collapsedImageHeight: CGFloat = 44
+  
   private func getOffsetForHeaderImage(_ geometry: GeometryProxy) -> CGFloat {
-    let scrollOffset = getScrollOffset(geometry)
-    let sizeOffScreen = imageHeight// 3
-    
-    // subtradct safeAreaInsets.top so that image will overlap safe area
-    
     let offset = getScrollOffset(geometry)
+    let sizeOffScreen = imageHeight - collapsedImageHeight // 3
     
-    //    print(offset)
-    
-    // for the negative scroll
     if offset > 0 {
-      print("-offset")
-      print(-offset + (imageHeight / 2.2))
-      
-      return  200 - offset// case where image zooms in response to negative scrolling
+      print(offset)
+      return -offset // case where image zooms in response to negative scrolling
     }
     
-    
-    
-    if offset < -sizeOffScreen { // case to create the 44px sticky header after scrolling far enough
-      // Since we want 44 px fixed on the screen we get our offset of -256 or anything less than. Take the abs value
-      let imageOffset = abs(min(-sizeOffScreen, offset))
-      
-      // Now we can the amount of offset above our size off screen. So if we've scrolled -250px our size offscreen is -225px we offset our image by an additional 25 px to put it back at the amount needed to remain offscreen/amount on screen.
-      print("cool")
-      
-      return imageOffset - sizeOffScreen
-    }
+    print(offset)
 
-    return imageHeight / 2
+    return 0
   }
   
   private func getBlurRadiusForImage(_ geometry: GeometryProxy) -> CGFloat {
@@ -114,7 +118,43 @@ struct ParentView: View {
     geometry.frame(in: .global).minY
   }
   
+  class ViewFrame: ObservableObject {
+    var startingRect: CGRect?
+    
+    @Published var frame: CGRect {
+      willSet {
+        if startingRect == nil {
+          startingRect = newValue
+        }
+      }
+    }
+    
+    init() {
+      self.frame = .zero
+    }
+  }
   
+  struct GeometryGetter: View {
+    @Binding var rect: CGRect
+    
+    var body: some View {
+      GeometryReader { geometry in
+        AnyView(Color.clear)
+          .preference(key: RectanglePreferenceKey.self, value: geometry.frame(in: .global))
+      }.onPreferenceChange(RectanglePreferenceKey.self) { (value) in
+        self.rect = value
+      }
+    }
+  }
+  
+  // for tracking any rectangle passed in
+  struct RectanglePreferenceKey: PreferenceKey {
+    static var defaultValue: CGRect = .zero
+    
+    static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
+      value = nextValue()
+    }
+  }
   
   struct ShotlistPreview: View {
     var shoot: Shoot = Shoot.sample
