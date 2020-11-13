@@ -10,18 +10,18 @@ import SwiftUI
 
 struct LocationCard: View {
   var location: Location
-  
+
   init(_ location: Location) {
     self.location = location
   }
-  
+
   var body: some View {
     ZStack {
       RoundedRectangle(cornerRadius: 16)
         .stroke(borderGray, lineWidth: 1)
       RoundedRectangle(cornerRadius: 16)
         .foregroundColor(backgroundSecondary)
-      HStack(spacing:0) {
+      HStack(spacing: 0) {
         ZStack {
           RoundedRectangle(cornerRadius: 10)
             .stroke(borderGray, lineWidth: 1)
@@ -32,8 +32,8 @@ struct LocationCard: View {
         }
         .frame(width: 32, height: 56)
         .padding(.horizontal, 8)
-          
-        VStack(alignment: .leading, spacing:0) {
+
+        VStack(alignment: .leading, spacing: 0) {
           Text(location.title)
             .font(.custom("Avenir-Heavy", size: 14))
             .foregroundColor(contentPrimary)
@@ -55,4 +55,3 @@ struct LocationCard: View {
     )
   }
 }
-

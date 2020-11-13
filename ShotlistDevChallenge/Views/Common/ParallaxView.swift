@@ -11,20 +11,15 @@ import Foundation
 import SwiftUI
 
 struct ParallaxView: View {
-  @Binding var onClick: OnClickHandler
-  @State var titleText = "We love closures"
-  
   @State var time = Timer.publish(every: 0.1, on: .current, in: .tracking).autoconnect()
+
   @Binding var showStickyHeader: Bool
-  
-  
+
   let gradientColors: [Color] = [
     Color(red: 0.01, green: 0.01, blue: 0.01, opacity: 0.5),
     Color(red: 1, green: 1, blue: 1, opacity: 1)
   ]
-  
-  private func goBack() {}
-  
+
   var body: some View {
     GeometryReader { geometry in
       ZStack {
@@ -35,34 +30,32 @@ struct ParallaxView: View {
           .clipped()
           .onReceive(self.time) { (_) in // potential code smell, this is a lot of processing
             let y = geometry.frame(in: .global).minY
-            if -y > (UIScreen.main.bounds.height / 2.2) - 50 {
-              withAnimation{
+            if -y > (UIScreen.main.bounds.height / 2.2) - 44 {
+              withAnimation {
                 self.showStickyHeader = true
               }
             } else {
-              withAnimation{
+              withAnimation {
                 self.showStickyHeader = false
               }
             }
           }
         LinearGradient(gradient: Gradient(colors: gradientColors), startPoint: .top, endPoint: .bottom)
-        
       }
       .offset(y: getOffsetForHeaderImage(geometry))
       .frame(width: geometry.size.width, height: self.getHeightForHeaderImage(geometry))
-      
     }.frame(height: 390)
   }
-  
+
   private func getBlurRadiusForImage(_ geometry: GeometryProxy) -> CGFloat {
-    
+
     let offset = geometry.frame(in: .global).maxY
-    
+
     let height = geometry.size.height
     let blur = (height - max(offset, 0)) / height // 3 (values will range from 0 - 1)
     return blur * 3 // Values will range from 0 - 6
   }
-  
+
   private func getHeightForHeaderImage(_ geometry: GeometryProxy) -> CGFloat {
     let offset = getScrollOffset(geometry)
     let imageHeight = geometry.size.height
@@ -71,24 +64,16 @@ struct ParallaxView: View {
     }
     return imageHeight
   }
-  
-  private let imageHeight: CGFloat = 200 // 1
-  private let collapsedImageHeight: CGFloat = 44
-  
+
   private func getOffsetForHeaderImage(_ geometry: GeometryProxy) -> CGFloat {
     let offset = getScrollOffset(geometry)
-    let sizeOffScreen = imageHeight - collapsedImageHeight // 3
-    
+
     if offset > 0 {
-      print(offset)
       return -offset // case where image zooms in response to negative scrolling
     }
-    
-    print(offset)
-    
     return 0
   }
-  
+
   private func getScrollOffset(_ geometry: GeometryProxy) -> CGFloat {
     geometry.frame(in: .global).minY
   }

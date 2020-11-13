@@ -11,6 +11,6 @@ import Foundation
 struct Task {
   var id: Int
   var title: String
-  
+
   static var sample = Task(id: 1, title: "Sample Task")
 }

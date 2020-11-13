@@ -10,10 +10,9 @@ import SwiftUI
 
 struct ShotlistRequiredShots: View {
   var shots: [Shot] = [ Shot.sample ]
-  
+
   private func action() {}
 
-  
   var body: some View {
     VStack(spacing: 0) {
       // Header
@@ -21,9 +20,9 @@ struct ShotlistRequiredShots: View {
         Text("Required Shots")
           .font(.custom("Avenir-Heavy", size: 20))
           .foregroundColor(contentPrimary)
-        
+
         Spacer()
-        
+
         Button(action: {
           //
         }) {
@@ -34,7 +33,7 @@ struct ShotlistRequiredShots: View {
       }
       .frame(height: 44)
       .padding(.bottom, 8)
-      
+
       // Body
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(spacing: 20) {
@@ -52,7 +51,7 @@ struct ShotlistRequiredShots: View {
 private struct RequiredShotCard: View {
   var shot: Shot
   let action: () -> Void
-  
+
   var body: some View {
     VStack(alignment: .leading, spacing: 8) {
       Group {
@@ -60,9 +59,9 @@ private struct RequiredShotCard: View {
           .resizable()
           .aspectRatio(contentMode: .fill)
           .frame(width: 100, height: 100)
-        
+
       }.cornerRadius(16)
-      
+
       VStack(alignment: .leading, spacing: 0) {
         Text(shot.title)
           .font(.custom("Avenir-Heavy", size: 14))
@@ -75,4 +74,3 @@ private struct RequiredShotCard: View {
     .onTapGesture(perform: action)
   }
 }
-

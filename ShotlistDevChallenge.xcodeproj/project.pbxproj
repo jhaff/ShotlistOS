@@ -10,13 +10,16 @@
 		3507DBC1255E2F7300BC989C /* ParallaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3507DBC0255E2F7300BC989C /* ParallaxView.swift */; };
 		350A86B92559CB5C00AE73F8 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350A86B82559CB5C00AE73F8 /* File.swift */; };
 		356687D3255D7F1E00E362E0 /* StickyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356687D2255D7F1E00E362E0 /* StickyHeaderView.swift */; };
+		356E1137255E6C5B00A3655A /* ShotlistNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E1136255E6C5B00A3655A /* ShotlistNav.swift */; };
+		356E113B255E6E4600A3655A /* ShotlistInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E113A255E6E4600A3655A /* ShotlistInformation.swift */; };
+		356E113E255E6EEB00A3655A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E113D255E6EEB00A3655A /* Utilities.swift */; };
 		35FF8FC9255E3D3F0099B0E4 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FF8FC8255E3D3F0099B0E4 /* TextView.swift */; };
 		DAF09E21255068DA009E2598 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF09E20255068DA009E2598 /* AppDelegate.swift */; };
 		DAF09E23255068DA009E2598 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF09E22255068DA009E2598 /* SceneDelegate.swift */; };
 		DAF09E25255068DA009E2598 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF09E24255068DA009E2598 /* ContentView.swift */; };
 		DAF09E2A255068DB009E2598 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAF09E29255068DB009E2598 /* Preview Assets.xcassets */; };
 		DAF09E2D255068DB009E2598 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAF09E2B255068DB009E2598 /* LaunchScreen.storyboard */; };
-		DAF09E532550734A009E2598 /* ShootPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF09E3E2550734A009E2598 /* ShootPreview.swift */; };
+		DAF09E532550734A009E2598 /* ShotlistPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF09E3E2550734A009E2598 /* ShotlistPreview.swift */; };
 		DAF09E542550734A009E2598 /* ShotlistTeamChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF09E3F2550734A009E2598 /* ShotlistTeamChat.swift */; };
 		DAF09E552550734A009E2598 /* ShotlistHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF09E402550734A009E2598 /* ShotlistHeader.swift */; };
 		DAF09E582550734A009E2598 /* ShotlistLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF09E442550734A009E2598 /* ShotlistLocations.swift */; };
@@ -38,6 +41,9 @@
 		3507DBC0255E2F7300BC989C /* ParallaxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxView.swift; sourceTree = "<group>"; };
 		350A86B82559CB5C00AE73F8 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		356687D2255D7F1E00E362E0 /* StickyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeaderView.swift; sourceTree = "<group>"; };
+		356E1136255E6C5B00A3655A /* ShotlistNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotlistNav.swift; sourceTree = "<group>"; };
+		356E113A255E6E4600A3655A /* ShotlistInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotlistInformation.swift; sourceTree = "<group>"; };
+		356E113D255E6EEB00A3655A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		35FF8FC8255E3D3F0099B0E4 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		DAF09E1D255068DA009E2598 /* ShotlistDevChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShotlistDevChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAF09E20255068DA009E2598 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +52,7 @@
 		DAF09E29255068DB009E2598 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DAF09E2C255068DB009E2598 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DAF09E2E255068DB009E2598 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DAF09E3E2550734A009E2598 /* ShootPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShootPreview.swift; sourceTree = "<group>"; };
+		DAF09E3E2550734A009E2598 /* ShotlistPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotlistPreview.swift; sourceTree = "<group>"; };
 		DAF09E3F2550734A009E2598 /* ShotlistTeamChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotlistTeamChat.swift; sourceTree = "<group>"; };
 		DAF09E402550734A009E2598 /* ShotlistHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotlistHeader.swift; sourceTree = "<group>"; };
 		DAF09E442550734A009E2598 /* ShotlistLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotlistLocations.swift; sourceTree = "<group>"; };
@@ -75,6 +81,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		356E1140255E752200A3655A /* ShotlistInformation Sections */ = {
+			isa = PBXGroup;
+			children = (
+				DAF09E3F2550734A009E2598 /* ShotlistTeamChat.swift */,
+				DAF09E442550734A009E2598 /* ShotlistLocations.swift */,
+				DAF09E452550734A009E2598 /* BackgroundInfo.swift */,
+				DAF09E4B2550734A009E2598 /* ShotlistRequiredShots.swift */,
+			);
+			path = "ShotlistInformation Sections";
+			sourceTree = "<group>";
+		};
+		356E1141255E75E000A3655A /* ShotlistPreview Elements */ = {
+			isa = PBXGroup;
+			children = (
+				DAF09E4A2550734A009E2598 /* Options.swift */,
+				356E113A255E6E4600A3655A /* ShotlistInformation.swift */,
+				356687D2255D7F1E00E362E0 /* StickyHeaderView.swift */,
+				356E1136255E6C5B00A3655A /* ShotlistNav.swift */,
+				DAF09E402550734A009E2598 /* ShotlistHeader.swift */,
+			);
+			path = "ShotlistPreview Elements";
+			sourceTree = "<group>";
+		};
 		DAF09E14255068D9009E2598 = {
 			isa = PBXGroup;
 			children = (
@@ -119,13 +148,9 @@
 		DAF09E342550734A009E2598 /* ShotlistPreview */ = {
 			isa = PBXGroup;
 			children = (
-				DAF09E3E2550734A009E2598 /* ShootPreview.swift */,
-				DAF09E3F2550734A009E2598 /* ShotlistTeamChat.swift */,
-				DAF09E402550734A009E2598 /* ShotlistHeader.swift */,
-				DAF09E442550734A009E2598 /* ShotlistLocations.swift */,
-				DAF09E452550734A009E2598 /* BackgroundInfo.swift */,
-				DAF09E4A2550734A009E2598 /* Options.swift */,
-				DAF09E4B2550734A009E2598 /* ShotlistRequiredShots.swift */,
+				356E1141255E75E000A3655A /* ShotlistPreview Elements */,
+				356E1140255E752200A3655A /* ShotlistInformation Sections */,
+				DAF09E3E2550734A009E2598 /* ShotlistPreview.swift */,
 			);
 			path = ShotlistPreview;
 			sourceTree = "<group>";
@@ -146,9 +171,9 @@
 				DAF09E65255078BC009E2598 /* TasksPreview.swift */,
 				DAF09E63255074D4009E2598 /* Colors.swift */,
 				DAF09E612550748E009E2598 /* StateBar.swift */,
-				356687D2255D7F1E00E362E0 /* StickyHeaderView.swift */,
 				3507DBC0255E2F7300BC989C /* ParallaxView.swift */,
 				35FF8FC8255E3D3F0099B0E4 /* TextView.swift */,
+				356E113D255E6EEB00A3655A /* Utilities.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -237,7 +262,7 @@
 			files = (
 				356687D3255D7F1E00E362E0 /* StickyHeaderView.swift in Sources */,
 				35FF8FC9255E3D3F0099B0E4 /* TextView.swift in Sources */,
-				DAF09E532550734A009E2598 /* ShootPreview.swift in Sources */,
+				DAF09E532550734A009E2598 /* ShotlistPreview.swift in Sources */,
 				DAF09E64255074D4009E2598 /* Colors.swift in Sources */,
 				DAF09E6D25507A99009E2598 /* Location.swift in Sources */,
 				DAF09E592550734A009E2598 /* BackgroundInfo.swift in Sources */,
@@ -247,6 +272,7 @@
 				DAF09E582550734A009E2598 /* ShotlistLocations.swift in Sources */,
 				DAF09E6B25507A91009E2598 /* Task.swift in Sources */,
 				3507DBC1255E2F7300BC989C /* ParallaxView.swift in Sources */,
+				356E113B255E6E4600A3655A /* ShotlistInformation.swift in Sources */,
 				DAF09E5D2550734A009E2598 /* Options.swift in Sources */,
 				DAF09E5E2550734A009E2598 /* ShotlistRequiredShots.swift in Sources */,
 				DAF09E66255078BC009E2598 /* TasksPreview.swift in Sources */,
@@ -257,6 +283,8 @@
 				DAF09E68255078D8009E2598 /* LocationCard.swift in Sources */,
 				350A86B92559CB5C00AE73F8 /* File.swift in Sources */,
 				DAF09E25255068DA009E2598 /* ContentView.swift in Sources */,
+				356E113E255E6EEB00A3655A /* Utilities.swift in Sources */,
+				356E1137255E6C5B00A3655A /* ShotlistNav.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

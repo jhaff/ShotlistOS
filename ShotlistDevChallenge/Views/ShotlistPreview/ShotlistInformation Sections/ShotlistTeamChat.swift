@@ -15,9 +15,9 @@ struct ShotlistTeamChat: View {
         Text("Team + Chat")
           .font(.custom("Avenir-Medium", size: 18))
           .foregroundColor(contentPrimary)
-        
+
         Spacer()
-        
+
         Button(action: {
           print("invite new members")
         }) {
@@ -26,23 +26,23 @@ struct ShotlistTeamChat: View {
             .foregroundColor(contentSecondary)
         }
       }.frame(height: 44).padding(.bottom, 8)
-      
+
       HStack(spacing: 16) {
         ShotlistTeamCard()
         ShotlistTeamCard()
       }
       .frame(height: 48)
       .padding(.bottom, 8)
-      
+
       HStack(spacing: 16) {
         ShotlistTeamCard()
         ShotlistTeamCard()
       }
       .frame(height: 48)
       .padding(.bottom, 16)
-      
+
       ShotlistChat()
-      
+
     }.frame(height: 375)
   }
 }
@@ -58,7 +58,6 @@ struct ShotlistChat: View {
   }
 }
 
-
 private struct ShotlistTeamCard: View {
   var body: some View {
     ZStack {
@@ -67,9 +66,9 @@ private struct ShotlistTeamCard: View {
         .stroke(borderGray, lineWidth: 1)
       RoundedRectangle(cornerRadius: 16)
         .foregroundColor(backgroundSecondary)
-      
+
       // Foreground
-      HStack(spacing:8) {
+      HStack(spacing: 8) {
         // Image
         ZStack {
           Circle()
@@ -82,8 +81,8 @@ private struct ShotlistTeamCard: View {
             .frame(width: 18)
             .foregroundColor(foundationPrimaryA)
         }.padding([.leading, .vertical], 8)
-        
-        VStack(alignment: .leading, spacing:0) {
+
+        VStack(alignment: .leading, spacing: 0) {
           Text("Label")
             .font(.custom("Avenir-Heavy", size: 12))
             .foregroundColor(contentPrimary)
@@ -91,7 +90,7 @@ private struct ShotlistTeamCard: View {
           .font(.custom("Avenir-Roman", size: 10))
           .foregroundColor(contentTertiary)
         }
-        
+
         Spacer()
       }
     }
