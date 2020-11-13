@@ -16,7 +16,7 @@ struct ParallaxView: View {
   @Binding var showStickyHeader: Bool
 
   let gradientColors: [Color] = [
-    Color(red: 0.01, green: 0.01, blue: 0.01, opacity: 0.5),
+    Color(red: 0.01, green: 0.01, blue: 0.01, opacity: 0.1),
     Color(red: 1, green: 1, blue: 1, opacity: 1)
   ]
 
