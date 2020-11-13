@@ -9,9 +9,10 @@
 import SwiftUI
 
 typealias OnClickHandler = (() -> Void)
+typealias EditTappedHandler = (() -> Void)
 
 struct ShootPreview: View {
-  var shoot: Shoot = Shoot.sample
+  @State var shoot: Shoot = Shoot.sample
   
   @ObservedObject var headerContent = ViewFrame() // potential code smell
   
@@ -20,6 +21,7 @@ struct ShootPreview: View {
   @State private var titleRect: CGRect = .zero
   
   @State var onClick: OnClickHandler = { }
+
   @State var time = Timer.publish(every: 0.1, on: .current, in: .tracking).autoconnect()
   @State var showStickyHeader = false
   
@@ -32,8 +34,9 @@ struct ShootPreview: View {
         // the shotlist information
         VStack {
           ShotlistHeader(shoot: shoot, onClick: $onClick).zIndex(40)
-          ShotlistPreview(onClick: $onClick).zIndex(50)
-        }.offset(x: 0, y: -120) // how far up we want
+          ShotlistPreview(shoot: $shoot, onClick: $onClick).zIndex(50).padding(.horizontal, 16).zIndex(10)
+        }
+        .offset(y: -120) // how far up we want
       }.background(GeometryGetter(rect: $headerContent.frame))
       
       // sticky header
@@ -43,7 +46,7 @@ struct ShootPreview: View {
           .padding(.horizontal)
           .padding(.bottom)
           .position(
-            x: UIScreen.main.bounds.width / 2.0 ?? 0.0
+            x: UIScreen.main.bounds.width / 2.0
           )
       } else {
         // top non-sticky nav
@@ -103,21 +106,25 @@ struct ShootPreview: View {
   }
   
   struct ShotlistPreview: View {
-    var shoot: Shoot = Shoot.sample
+    @Binding var shoot: Shoot
     @State private var description: String = Shoot.sample.description
+    @State private var textStyle: UIFont.TextStyle = UIFont.TextStyle.body
+    @State var isEditing: Bool = false
+    @State var editTapped: EditTappedHandler = { }
+
     @Binding var onClick: OnClickHandler
     
     var body: some View {
       Group {
         ShotlistStatusBar()
           .padding(.horizontal, 38)
-        BackgroundInfo(description: $description)
+        BackgroundInfo(shoot: $shoot, textStyle: $textStyle, editTapped: $editTapped)
         Options()
         ShotlistRequiredShots()
         ShotlistLocations()
         TasksPreview()
         ShotlistTeamChat()
-      }.padding(.horizontal, 16).zIndex(10)
+      }
     }
   }
   
